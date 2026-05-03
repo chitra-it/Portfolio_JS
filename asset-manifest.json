@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e6c13ad2.css",
+    "main.js": "/static/js/main.316e6a35.js",
+    "static/js/453.6fedb34c.chunk.js": "/static/js/453.6fedb34c.chunk.js",
+    "static/media/bg.jpg": "/static/media/bg.a7790f0465f55fe51d99.jpg",
+    "static/media/profile.jpg": "/static/media/profile.d9a43e62560efc503542.jpg",
+    "static/media/Chitra_Shree_K_Resume.pdf": "/static/media/Chitra_Shree_K_Resume.cb886c89d5750fd6b919.pdf",
+    "static/media/gesture-recognition.jpg": "/static/media/gesture-recognition.d19c4637ffad19ac6181.jpg",
+    "static/media/Typing_Club.png": "/static/media/Typing_Club.5fe944e79b9eff9b06c8.png",
+    "static/media/Ethnotech.png": "/static/media/Ethnotech.b8cf5ba5ac19f15b832b.png",
+    "index.html": "/index.html",
+    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
+    "main.316e6a35.js.map": "/static/js/main.316e6a35.js.map",
+    "453.6fedb34c.chunk.js.map": "/static/js/453.6fedb34c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.316e6a35.js"
+  ]
+}
