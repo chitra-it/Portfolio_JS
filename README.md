@@ -1,70 +1,127 @@
-# Getting Started with Create React App
+# YAML <a href="https://www.npmjs.com/package/yaml"><img align="right" src="https://badge.fury.io/js/yaml.svg" title="npm package" /></a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+`yaml` is a JavaScript parser and stringifier for [YAML](http://yaml.org/), a human friendly data serialization standard. It supports both parsing and stringifying data using all versions of YAML, along with all common data schemas. As a particularly distinguishing feature, `yaml` fully supports reading and writing comments and blank lines in YAML documents.
 
-## Available Scripts
+The library is released under the ISC open source license, and the code is [available on GitHub](https://github.com/eemeli/yaml/). It has no external dependencies and runs on Node.js 6 and later, and in browsers from IE 11 upwards.
 
-In the project directory, you can run:
+For the purposes of versioning, any changes that break any of the endpoints or APIs documented here will be considered semver-major breaking changes. Undocumented library internals may change between minor versions, and previous APIs may be deprecated (but not removed).
 
-### `npm start`
+For more information, see the project's documentation site: [**eemeli.org/yaml/v1**](https://eemeli.org/yaml/v1/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To install:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```sh
+npm install yaml
+```
 
-### `npm test`
+**Note:** This is `yaml@1`. You may also be interested in the next version, currently available as [`yaml@next`](https://www.npmjs.com/package/yaml/v/next).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## API Overview
 
-### `npm run build`
+The API provided by `yaml` has three layers, depending on how deep you need to go: [Parse & Stringify](https://eemeli.org/yaml/v1/#parse-amp-stringify), [Documents](https://eemeli.org/yaml/#documents), and the [CST Parser](https://eemeli.org/yaml/#cst-parser). The first has the simplest API and "just works", the second gets you all the bells and whistles supported by the library along with a decent [AST](https://eemeli.org/yaml/#content-nodes), and the third is the closest to YAML source, making it fast, raw, and crude.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```js
+import YAML from 'yaml'
+// or
+const YAML = require('yaml')
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Parse & Stringify
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [`YAML.parse(str, options): value`](https://eemeli.org/yaml/v1/#yaml-parse)
+- [`YAML.stringify(value, options): string`](https://eemeli.org/yaml/v1/#yaml-stringify)
 
-### `npm run eject`
+### YAML Documents
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- [`YAML.createNode(value, wrapScalars, tag): Node`](https://eemeli.org/yaml/v1/#creating-nodes)
+- [`YAML.defaultOptions`](https://eemeli.org/yaml/v1/#options)
+- [`YAML.Document`](https://eemeli.org/yaml/v1/#yaml-documents)
+  - [`constructor(options)`](https://eemeli.org/yaml/v1/#creating-documents)
+  - [`defaults`](https://eemeli.org/yaml/v1/#options)
+  - [`#anchors`](https://eemeli.org/yaml/v1/#working-with-anchors)
+  - [`#contents`](https://eemeli.org/yaml/v1/#content-nodes)
+  - [`#errors`](https://eemeli.org/yaml/v1/#errors)
+- [`YAML.parseAllDocuments(str, options): YAML.Document[]`](https://eemeli.org/yaml/v1/#parsing-documents)
+- [`YAML.parseDocument(str, options): YAML.Document`](https://eemeli.org/yaml/v1/#parsing-documents)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+import { Pair, YAMLMap, YAMLSeq } from 'yaml/types'
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- [`new Pair(key, value)`](https://eemeli.org/yaml/v1/#creating-nodes)
+- [`new YAMLMap()`](https://eemeli.org/yaml/v1/#creating-nodes)
+- [`new YAMLSeq()`](https://eemeli.org/yaml/v1/#creating-nodes)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### CST Parser
 
-## Learn More
+```js
+import parseCST from 'yaml/parse-cst'
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [`parseCST(str): CSTDocument[]`](https://eemeli.org/yaml/v1/#parsecst)
+- [`YAML.parseCST(str): CSTDocument[]`](https://eemeli.org/yaml/v1/#parsecst)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## YAML.parse
 
-### Code Splitting
+```yaml
+# file.yml
+YAML:
+  - A human-readable data serialization language
+  - https://en.wikipedia.org/wiki/YAML
+yaml:
+  - A complete JavaScript implementation
+  - https://www.npmjs.com/package/yaml
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```js
+import fs from 'fs'
+import YAML from 'yaml'
 
-### Analyzing the Bundle Size
+YAML.parse('3.14159')
+// 3.14159
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+YAML.parse('[ true, false, maybe, null ]\n')
+// [ true, false, 'maybe', null ]
 
-### Making a Progressive Web App
+const file = fs.readFileSync('./file.yml', 'utf8')
+YAML.parse(file)
+// { YAML:
+//   [ 'A human-readable data serialization language',
+//     'https://en.wikipedia.org/wiki/YAML' ],
+//   yaml:
+//   [ 'A complete JavaScript implementation',
+//     'https://www.npmjs.com/package/yaml' ] }
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## YAML.stringify
 
-### Advanced Configuration
+```js
+import YAML from 'yaml'
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+YAML.stringify(3.14159)
+// '3.14159\n'
 
-### Deployment
+YAML.stringify([true, false, 'maybe', null])
+// `- true
+// - false
+// - maybe
+// - null
+// `
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+YAML.stringify({ number: 3, plain: 'string', block: 'two\nlines\n' })
+// `number: 3
+// plain: string
+// block: >
+//   two
+//
+//   lines
+// `
+```
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Browser testing provided by:
+
+<a href="https://www.browserstack.com/open-source">
+<img width=200 src="https://eemeli.org/yaml/images/browserstack.svg" />
+</a>
