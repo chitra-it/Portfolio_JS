@@ -1,9 +1,9 @@
 {
-  "name": "workbox-range-requests",
+  "name": "workbox-precaching",
   "version": "6.6.0",
   "license": "MIT",
   "author": "Google's Web DevRel Team",
-  "description": "This library creates a new Response, given a source Response and a Range header value.",
+  "description": "This module efficiently precaches assets.",
   "repository": "googlechrome/workbox",
   "bugs": "https://github.com/googlechrome/workbox/issues",
   "homepage": "https://github.com/GoogleChrome/workbox",
@@ -11,22 +11,19 @@
     "workbox",
     "workboxjs",
     "service worker",
-    "sw",
-    "caching",
-    "cache",
-    "range",
-    "media",
-    "workbox-plugin"
+    "sw"
   ],
   "workbox": {
-    "browserNamespace": "workbox.rangeRequests",
+    "browserNamespace": "workbox.precaching",
     "packageType": "sw"
   },
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
   "dependencies": {
-    "workbox-core": "6.6.0"
+    "workbox-core": "6.6.0",
+    "workbox-routing": "6.6.0",
+    "workbox-strategies": "6.6.0"
   },
   "gitHead": "252644491d9bb5a67518935ede6df530107c9475"
 }
