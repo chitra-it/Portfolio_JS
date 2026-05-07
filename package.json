@@ -1,9 +1,9 @@
 {
-  "name": "workbox-window",
+  "name": "workbox-streams",
   "version": "6.6.0",
   "license": "MIT",
   "author": "Google's Web DevRel Team",
-  "description": "Simplifies communications with Workbox packages running in the service worker",
+  "description": "A library that makes it easier to work with Streams in the browser.",
   "repository": "googlechrome/workbox",
   "bugs": "https://github.com/googlechrome/workbox/issues",
   "homepage": "https://github.com/GoogleChrome/workbox",
@@ -12,20 +12,19 @@
     "workboxjs",
     "service worker",
     "sw",
-    "window",
-    "message",
-    "postMessage"
+    "streams",
+    "readablestream"
   ],
   "workbox": {
-    "packageType": "window",
-    "primaryBuild": "build/workbox-window.prod.mjs"
+    "browserNamespace": "workbox.streams",
+    "packageType": "sw"
   },
-  "main": "build/workbox-window.prod.umd.js",
-  "module": "build/workbox-window.prod.es5.mjs",
+  "main": "index.js",
+  "module": "index.mjs",
   "types": "index.d.ts",
   "dependencies": {
-    "@types/trusted-types": "^2.0.2",
-    "workbox-core": "6.6.0"
+    "workbox-core": "6.6.0",
+    "workbox-routing": "6.6.0"
   },
   "gitHead": "252644491d9bb5a67518935ede6df530107c9475"
 }

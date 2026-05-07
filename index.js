@@ -1,16 +1,17 @@
 /*
-  Copyright 2019 Google LLC
+  Copyright 2018 Google LLC
 
   Use of this source code is governed by an MIT-style
   license that can be found in the LICENSE file or at
   https://opensource.org/licenses/MIT.
 */
-import { messageSW } from './messageSW.js';
-import { Workbox } from './Workbox.js';
+import { concatenate } from './concatenate.js';
+import { concatenateToResponse } from './concatenateToResponse.js';
+import { isSupported } from './isSupported.js';
+import { strategy } from './strategy.js';
 import './_version.js';
 /**
- * @module workbox-window
+ * @module workbox-streams
  */
-export { messageSW, Workbox };
-// See https://github.com/GoogleChrome/workbox/issues/2770
-export * from './utils/WorkboxEvent.js';
+export { concatenate, concatenateToResponse, isSupported, strategy, };
+export * from './_types.js';

@@ -1,8 +1,10 @@
-import { messageSW } from './messageSW.js';
-import { Workbox } from './Workbox.js';
+import { concatenate } from './concatenate.js';
+import { concatenateToResponse } from './concatenateToResponse.js';
+import { isSupported } from './isSupported.js';
+import { strategy, StreamsHandlerCallback } from './strategy.js';
 import './_version.js';
 /**
- * @module workbox-window
+ * @module workbox-streams
  */
-export { messageSW, Workbox };
-export * from './utils/WorkboxEvent.js';
+export { concatenate, concatenateToResponse, isSupported, strategy, StreamsHandlerCallback, };
+export * from './_types.js';
