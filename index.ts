@@ -6,12 +6,12 @@
   https://opensource.org/licenses/MIT.
 */
 
-import {createPartialResponse} from './createPartialResponse.js';
-import {RangeRequestsPlugin} from './RangeRequestsPlugin.js';
+import {initialize, GoogleAnalyticsInitializeOptions} from './initialize.js';
+
 import './_version.js';
 
 /**
- * @module workbox-range-requests
+ * @module workbox-google-analytics
  */
 
-export {createPartialResponse, RangeRequestsPlugin};
+export {initialize, GoogleAnalyticsInitializeOptions};

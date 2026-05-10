@@ -1,9 +1,9 @@
 {
-  "name": "workbox-precaching",
+  "name": "workbox-google-analytics",
   "version": "6.6.0",
   "license": "MIT",
   "author": "Google's Web DevRel Team",
-  "description": "This module efficiently precaches assets.",
+  "description": "Queues failed requests and uses the Background Sync API to replay them when the network is available",
   "repository": "googlechrome/workbox",
   "bugs": "https://github.com/googlechrome/workbox/issues",
   "homepage": "https://github.com/GoogleChrome/workbox",
@@ -11,16 +11,21 @@
     "workbox",
     "workboxjs",
     "service worker",
-    "sw"
+    "sw",
+    "offline",
+    "google",
+    "analytics"
   ],
   "workbox": {
-    "browserNamespace": "workbox.precaching",
+    "browserNamespace": "workbox.googleAnalytics",
+    "outputFilename": "workbox-offline-ga",
     "packageType": "sw"
   },
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
   "dependencies": {
+    "workbox-background-sync": "6.6.0",
     "workbox-core": "6.6.0",
     "workbox-routing": "6.6.0",
     "workbox-strategies": "6.6.0"
